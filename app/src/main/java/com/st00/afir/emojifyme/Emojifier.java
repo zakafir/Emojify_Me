@@ -47,9 +47,32 @@ public class Emojifier {
         } else {
             //it detects faces in landscape mode only
             Toast.makeText(context, " Number of faces = " + faces.size(), Toast.LENGTH_SHORT).show();
+
+            for (int i = 0; i < faces.size(); ++i) {
+                Face face = faces.valueAt(i);
+
+                // Log the classification probabilities for each face.
+                getClassifications(face);
+            }
         }
 
         // Release the detector
         detector.release();
+    }
+
+    /**
+     * Method for logging the classification probabilities.
+     *
+     * @param face The face to get the classification probabilities.
+     */
+    private static void getClassifications(Face face) {
+        // Log all the probabilities
+        Log.d(LOG_TAG, "getClassifications: Smiling probability = " + face.getIsSmilingProbability());
+        Log.d(LOG_TAG, "getClassifications: Left eye open probability = "
+                + face.getIsLeftEyeOpenProbability());
+        Log.d(LOG_TAG, "getClassifications: Right eye open probability = "
+                + face.getIsRightEyeOpenProbability());
+        Log.d(LOG_TAG, "*********************************************************************");
+
     }
 }
